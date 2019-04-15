@@ -13,52 +13,52 @@ router.post('/register', (req, res) => {
     user.password = hash;
     if (user.username && user.password) {
         User.add(user)
-        .then(saved => {
-            res.status(201).json(saved)
-        })
-        .catch(error => {
-            res.status(500).json(error)
-        })
+            .then(saved => {
+                res.status(201).json(saved)
+            })
+            .catch(error => {
+                res.status(500).json(error)
+            })
     } else {
-        res.status(401).json({message: 'You need to send an username and a password'});
+        res.status(401).json({ message: 'You need to send an username and a password' });
     }
 });
 
 router.post('/login', (req, res) => {
     let { username, password } = req.body;
-    
-    User.findBy({ username })
-    .then(user => {
-        if (user && bcrypt.compareSync(password, user.password)) {
-            const token = generateToken(user);
 
-            res.status(200).json({ message: `Welcome ${user.username}`, token})
-        }else {
-            res.status(401).json({ message: 'Try Again'})
-        }
-    })
-    .catch(error => {
-        res.status(500).json(error)
-    })
+    User.findBy({ username })
+        .then(user => {
+            if (user && bcrypt.compareSync(password, user.password)) {
+                const token = generateToken(user);
+
+                res.status(200).json({ message: `Welcome ${user.username}`, token })
+            } else {
+                res.status(401).json({ message: 'Try Again' })
+            }
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
 })
 
 router.get('/logout', (req, res) => {
-    if(req.session){
-        req.session.destroy(error =>{
-            if(error){
+    if (req.session) {
+        req.session.destroy(error => {
+            if (error) {
                 res.send(error)
-            }else{
+            } else {
                 res.send('You are logged out')
             }
         })
-    }else{
+    } else {
         res.end();
     }
 })
 
-function generateToken(user){
+function generateToken(user) {
     const payload = {
-        subject: user.id, 
+        subject: user.id,
         username: user.username,
     }
     const option = {
