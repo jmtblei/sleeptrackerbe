@@ -12,7 +12,7 @@ function find() {
 }
 
 function findBy(sort) {
-    return db('user').where(sort)
+    return db('user').where(sort).first();
 }
 
 async function add(user){
