@@ -53,6 +53,17 @@ router.get('/logout', (req, res) => {
     }
 })
 
+router.post("/checkauth", (req, res) => {
+    const token = req.body.token;
+    jwt.verify(token, jwtSecret, err => {
+      if (err) {
+        res.send(false);
+      } else {
+        res.send(true);
+      }
+    });
+  });
+
 function generateToken(user){
     const payload = {
         subject: user.id, 
@@ -63,5 +74,16 @@ function generateToken(user){
     }
     return jwt.sign(payload, secret, option);
 }
+
+// function checkauth(req, res) {
+//     const token = req.body.token;
+//     jwt.verify(token, jwtSecret, err => {
+//       if (err) {
+//         res.send(false);
+//       } else {
+//         res.send(true);
+//       }
+// });
+// }
 
 module.exports = router;
