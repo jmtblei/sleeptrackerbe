@@ -19,6 +19,23 @@ router.get('/sleepstats', async(req, res) => {
     }
 })
 
+router.post("/add", async (req, res) => {
+    let { fullName, sleepMood, wakeMood, date, id, timeSlept } = req.body;
+    Sleep.findById(id, fullName)
+      .then(found => {
+        Sleep.add(found.id, sleepMood, wakeMood, date, timeSlept)
+          .then(added => {
+            res.status(201).json(added);
+          })
+          .catch(({ code, message }) => {
+            res.status(code).json({ message });
+          });
+      })
+      .catch(({ code, message }) => {
+        res.status(code).json({ message });
+      });
+  });
+  
 
 
 
