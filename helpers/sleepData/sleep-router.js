@@ -18,3 +18,5 @@ router.get('/sleepstats', async(req, res) => {
         res.status(500).json('You got nada mas')
     }
 })
+
+module.exports = router;
