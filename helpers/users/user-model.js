@@ -4,7 +4,8 @@ module.exports = {
     add,
     find,
     findBy,
-    findById
+    findById,
+    findSleepByUserId
 };
 
 function find() {
@@ -24,4 +25,11 @@ function findById(id){
     return db('user')
         .where({ id })
         .first();
+}
+
+function findSleepByUserId(id){
+    return db('user')
+    .select('user.username', 'sleep.timeSlept', 'sleep.wakeMood', 'sleep.sleepMood', 'sleep.date')
+    .join('sleep', 'user.id', 'sleep.user_id' )
+    .where('user.id', id)
 }

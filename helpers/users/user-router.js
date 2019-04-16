@@ -11,4 +11,22 @@ router.get('/', (req, res) => {
     .catch(err => res.send(err));
 });
 
+// router.get('/:id', async(req, res) => {
+//   try {
+//       let userID = await User.findById(req.params.id)
+//       res.status(200).json(userID)
+//   } catch(error){
+//       res.status(500).json('You got nada mas')
+//   }
+// })
+
+router.get('/:id', async(req, res) => {
+  try {
+      let userID = await User.findSleepByUserId(req.params.id)
+      res.status(200).json(userID)
+  } catch(error){
+      res.status(500).json('You got nada mas')
+  }
+})
+
 module.exports = router;
