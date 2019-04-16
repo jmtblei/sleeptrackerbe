@@ -90,6 +90,16 @@ module.exports = authTests = () => {
                     });
                 expect(response.body).toEqual({ message: "That username is taken" });
             })
+
+            it('return an error message if password is shorter then 8 char', async () => {
+                const response = await request(server)
+                    .post('/api/auth/register')
+                    .send({
+                        username: 'username',
+                        password: 'psw'
+                    });
+                expect(response.body).toEqual({ message: "That password must be at least 8 character long" });
+            })
         })
 
         describe('POST /login enpoint tests', () => {

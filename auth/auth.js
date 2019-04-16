@@ -11,29 +11,39 @@ const router = express.Router();
 
 router.post('/register', async (req, res) => {
     let user = req.body;
+    const email = user.email;
+    const username = user.username;
+    const password = user.password;
     const hash = bcrypt.hashSync(user.password, 12)
     user.password = hash;
-    const email = user.email;
     if (email && !validator.validate(email)) {
         res
             .status(400)
             .json({
                 message: "Please provide a valid email"
             });
-    } else if (!user.username || !user.password) {
+    } else if (!username || !password) {
         res
             .status(401)
             .json({
                 message: 'You need to send an username and a password'
             });
     }
-    else if (await User.findBy({ username: user.username })) {
+    else if (await User.findBy({ username })) {
         res
             .status(400)
             .json({
                 message: "That username is taken"
             });
-    } else {
+    } 
+    else if (password.length < 8) {
+        res
+            .status(400)
+            .json({
+                message: "That password must be at least 8 character long"
+            })
+    } 
+    else {
         User.add(user)
             .then(saved => {
                 res.status(201).json(saved)
