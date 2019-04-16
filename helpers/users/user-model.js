@@ -36,7 +36,7 @@ function findById(id){
 
 function findSleepByUserId(id){
     return db('user')
-    .select('user.id','sleep.user_id','user.fullname', 'sleep.timeSlept', 'sleep.wakeMood', 'sleep.sleepMood', 'sleep.date')
+    .select('sleep.id','sleep.user_id','user.fullname', 'sleep.timeSlept', 'sleep.wakeMood', 'sleep.sleepMood', 'sleep.date')
     .join('sleep', 'user.id', 'sleep.user_id' )
     .where('user.id', id)
 }
