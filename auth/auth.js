@@ -56,25 +56,15 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', (req, res) => {
     let { username, password } = req.body;
-
     User.findBy({ username })
-
         .then(user => {
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user);
-
-                res
-                    .status(200)
-                    .json({
-                        message: `Welcome ${user.username},${user.id}`,
-                        token
-                    })
+                res.status(200)
+                .json({message: `Welcome ${user.username},${user.id}`,token})
             } else {
-                res
-                    .status(401)
-                    .json({
-                        message: 'Try Again'
-                    })
+                res.status(401)
+                .json({ message: 'Try Again'})
             }
         })
         .catch(error => {
