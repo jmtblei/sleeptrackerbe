@@ -1,7 +1,7 @@
 const db = require('../../data/dbConfig.js');
 
 module.exports = {
-    add,
+    insert,
     find,
     findBy,
     findById,
@@ -16,7 +16,7 @@ function findBy(sort) {
     return db('sleep').where(sort)
 }
 
-async function add(sleep){
+async function insert(sleep){
     const [id] = await db('sleep').insert(sleep);
     return findById(id);
 }
