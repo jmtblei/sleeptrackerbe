@@ -15,26 +15,32 @@ router.post('/register', async (req, res) => {
     user.password = hash;
     const email = user.email;
     if (email && !validator.validate(email)) {
-        res.status(400).json({ message: "Please provide a valid email" });
+        res
+            .status(400)
+            .json({
+                message: "Please provide a valid email"
+            });
     } else if (!user.username || !user.password) {
-        res.status(401).json({ message: 'You need to send an username and a password' });
-    } 
+        res
+            .status(401)
+            .json({
+                message: 'You need to send an username and a password'
+            });
+    }
     else if (await User.findBy({ username: user.username })) {
-    res.status(400).json({ message: "That username is taken" });
-     } 
-    else {
-        // const existingUser = User.findBy({ username: user.username });
-        // if (existingUser) {
-        //     res.status(400).json({ message: "That username is taken" });
-        // } else {
-            User.add(user)
-                .then(saved => {
-                    res.status(201).json(saved)
-                })
-                .catch(error => {
-                    res.status(500).json(error)
-                })
-        // }
+        res
+            .status(400)
+            .json({
+                message: "That username is taken"
+            });
+    } else {
+        User.add(user)
+            .then(saved => {
+                res.status(201).json(saved)
+            })
+            .catch(error => {
+                res.status(500).json(error)
+            })
     }
 });
 
@@ -46,9 +52,18 @@ router.post('/login', (req, res) => {
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user);
 
-                res.status(200).json({ message: `Welcome ${user.username}`, token })
+                res
+                    .status(200)
+                    .json({
+                        message: `Welcome ${user.username}`,
+                        token
+                    })
             } else {
-                res.status(401).json({ message: 'Try Again' })
+                res
+                    .status(401)
+                    .json({
+                        message: 'Try Again'
+                    })
             }
         })
         .catch(error => {

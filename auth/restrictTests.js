@@ -14,7 +14,9 @@ module.exports = restrictTests = () => {
         })
 
         it('gives back a message if token is incorrect', async () => {
-            const response = await request(server).get('/api/user').set({ Authorization: "wrong token" });
+            const response = await request(server)
+                .get('/api/user')
+                .set({ Authorization: "wrong token" });
             expect(response.body).toEqual({ message: 'Invalid!!! Try Again' });
         })
 
@@ -24,14 +26,22 @@ module.exports = restrictTests = () => {
         })
 
         it('gives a 401 status if a token incorrect', async () => {
-            const response = await request(server).get('/api/user').set({ Authorization: "wrong token" });
+            const response = await request(server)
+                .get('/api/user')
+                .set({ Authorization: "wrong token" });
             expect(response.status).toEqual(401);
         })
 
         it('gives a 200 status code if the correct token is provided', async () => {
-            await request(server).post('/api/auth/register').send({ username: "giaco", password: 'bena' })
-            const login = await request(server).post('/api/auth/login').send({ username: "giaco", password: 'bena' })
-            const response = await request(server).get('/api/user').set({ Authorization: `${login.body.token}` });
+            await request(server)
+                .post('/api/auth/register')
+                .send({ username: "giaco", password: 'bena' })
+            const login = await request(server)
+                .post('/api/auth/login')
+                .send({ username: "giaco", password: 'bena' })
+            const response = await request(server)
+                .get('/api/user')
+                .set({ Authorization: `${login.body.token}` });
             expect(response.status).toEqual(200);
         })
     })
