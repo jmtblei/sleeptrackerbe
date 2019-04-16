@@ -3,17 +3,14 @@ const db = require('../../data/dbConfig.js');
 module.exports = {
     insert,
     find,
-    findBy,
     findById,
-    getStats
+    getStats,
+    remove,
+    update
 };
 
 function find() {
     return db('sleep');
-}
-
-function findBy(sort) {
-    return db('sleep').where(sort)
 }
 
 async function insert(sleep){
@@ -33,4 +30,16 @@ function getStats(id, dateStart, dateEnd){
     .count('timeSlept')
     .whereBetween('date', [dateStart, dateEnd])
     .andWhere('user_id', id)
+}
+
+function remove(id) {
+    return db('sleep')
+      .where('id', id)
+      .del();
+  }
+
+function update(id, changes){
+    return db('sleep')
+    .where({ id })
+    .update(changes)
 }
