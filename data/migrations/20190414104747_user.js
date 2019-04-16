@@ -23,7 +23,7 @@ exports.up = function(knex, Promise) {
         sleep.integer("timeSlept").notNullable();
         sleep.integer("wakeMood");
         sleep.integer("sleepMood");
-        sleep.date('YYYY-MM-DD');
+        sleep.date('date', 10);
     })
 };
 
