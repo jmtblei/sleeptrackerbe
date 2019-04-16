@@ -9,7 +9,8 @@ exports.up = function (knex, Promise) {
             .notNullable()
             .unique();
         users.string("password", 32).notNullable();
-    }).createTable('sleep', sleep => {
+    })
+    .createTable('sleep', sleep => {
         sleep.increments();
         sleep
             .integer("user_id").notNullable()
@@ -20,8 +21,8 @@ exports.up = function (knex, Promise) {
             .onUpdate("CASCADE");
 
         sleep.integer("timeSlept").notNullable();
-        sleep.integer("wakeMood");
-        sleep.integer("sleepMood");
+        sleep.integer("wakeMood").notNullable();
+        sleep.integer("sleepMood").notNullable();
         sleep.date('date', 10);
     })
 };
