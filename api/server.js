@@ -13,7 +13,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use('/api/auth', auth);
-server.use('/api/user', user);
+server.use('/api/user', restrict, user);
 
 server.get('/', (req,res) => {
     res.send('This is my Server!!!');
