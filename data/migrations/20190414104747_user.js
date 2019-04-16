@@ -17,7 +17,7 @@ exports.up = function(knex, Promise) {
             .unsigned()
             .references("id")
             .inTable("user")
-            .onDelete("CASCADE")
+            .onDelete("RESTRICT")
             .onUpdate("CASCADE");
 
         sleep.integer("timeSlept").notNullable();
