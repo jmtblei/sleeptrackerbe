@@ -55,7 +55,7 @@ router.get('/logout', (req, res) => {
 
 router.post("/checkauth", (req, res) => {
     const token = req.body.token;
-    jwt.verify(token, jwtSecret, err => {
+    jwt.verify(token, secret, err => {
       if (err) {
         res.send(false);
       } else {
@@ -74,16 +74,5 @@ function generateToken(user){
     }
     return jwt.sign(payload, secret, option);
 }
-
-// function checkauth(req, res) {
-//     const token = req.body.token;
-//     jwt.verify(token, jwtSecret, err => {
-//       if (err) {
-//         res.send(false);
-//       } else {
-//         res.send(true);
-//       }
-// });
-// }
 
 module.exports = router;
