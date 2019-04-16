@@ -35,14 +35,14 @@ router.post('/register', async (req, res) => {
             .json({
                 message: "That username is taken"
             });
-    } 
+    }
     else if (password.length < 8) {
         res
             .status(400)
             .json({
                 message: "That password must be at least 8 character long"
             })
-    } 
+    }
     else {
         User.add(user)
             .then(saved => {
@@ -59,9 +59,9 @@ router.post('/login', (req, res) => {
 
     User.findBy({ username })
 
-    .then(user => {
-        if (user && bcrypt.compareSync(password, user.password)) {
-            const token = generateToken(user);
+        .then(user => {
+            if (user && bcrypt.compareSync(password, user.password)) {
+                const token = generateToken(user);
 
                 res
                     .status(200)
@@ -95,6 +95,17 @@ router.get('/logout', (req, res) => {
         res.end();
     }
 })
+
+router.post("/checkauth", (req, res) => {
+    const token = req.body.token;
+    jwt.verify(token, secret, err => {
+        if (err) {
+            res.send(false);
+        } else {
+            res.send(true);
+        }
+    });
+});
 
 function generateToken(user) {
     const payload = {
