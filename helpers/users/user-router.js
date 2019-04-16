@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
     .catch(err => res.send(err));
 });
 
-// router.get('/:id', async(req, res) => {
+// router.get('/username', async(req, res) => {
 //   try {
-//       let userID = await User.findById(req.params.id)
-//       res.status(200).json(userID)
+//       let username = await User.findByUsername(req.body.username)
+//       res.status(200).json(username)
 //   } catch(error){
 //       res.status(500).json('You got nada mas')
 //   }
