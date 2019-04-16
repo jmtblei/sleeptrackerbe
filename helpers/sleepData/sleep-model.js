@@ -8,20 +8,20 @@ module.exports = {
 };
 
 function find() {
-    return db('user').select('id','username', 'password','fullName');
+    return db('sleep').select('timeSlept', 'wakeMood', 'sleepMood');
 }
 
 function findBy(sort) {
-    return db('user').where(sort).first();
+    return db('sleep').where(sort)
 }
 
-async function add(user){
-    const [id] = await db('user').insert(user);
+async function add(sleep){
+    const [id] = await db('sleep').insert(sleep);
     return findById(id);
 }
 
 function findById(id){ 
-    return db('user')
+    return db('sleep')
         .where({ id })
         .first();
 }

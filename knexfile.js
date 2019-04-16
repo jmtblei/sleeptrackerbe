@@ -1,8 +1,12 @@
 // Update with your config settings.
+const prodDbConnection = {
+  host: 'heroku',
+  database: 'user',
+  username: 'jake',
+  password: 'pass'
+}
+const sleeperDBconnection = process.env.DATABASE_URL || prodDbConnection
 
-
-
-// const sleeperDBconnection = process.env.DATABASE_URL || localPgConnection
 module.exports = {
 
   development: {
@@ -23,13 +27,7 @@ module.exports = {
       }
     },
   },
-  // production:{
-  //   client: 'pg',
-  //   connection: sleeperDBconnection,
-  //   migrations: {
-  //     directory: './data/migrations'
-  //   } 
-  // }
+
   testing: {
     client: 'sqlite3',
     connection: {
@@ -43,4 +41,15 @@ module.exports = {
       directory: './data/seeds',
     },
   },
+
+  production:{
+    client: 'pg',
+    connection: sleeperDBconnection,
+    migrations: {
+      directory: './data/migrations'
+    }, 
+    seeds: {
+      directory: './data/seeds',
+    },
+  }
 };
