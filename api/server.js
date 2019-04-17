@@ -13,11 +13,10 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
-// server.use('/api/auth', auth);
-// server.use('/api/user', restrict, user);
-// server.use('/api/sleep', restrict, sleep);
-server.use('/api/user', user);
-server.use('/api/sleep', sleep);
+server.use('/api/auth', auth);
+server.use('/api/user', restrict, user);
+server.use('/api/sleep', restrict, sleep);
+
 
 server.get('/', (req,res) => {
     res.send('This is my Server!!!');
