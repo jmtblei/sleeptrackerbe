@@ -10,6 +10,16 @@ router.get('/', async(req, res) => {
     }
 })
 
+router.get('/:date', async(req, res) => {
+    const { date } = req.params
+    try {
+        let sleep = await Sleep.findByDate(date)
+        res.status(200).json(sleep)
+    } catch(error){
+        res.status(500).json('Can\'t get the date')
+    }
+})
+
 router.post('/', async (req, res) => {
     try {
         let sleep = await Sleep.insert(req.body);

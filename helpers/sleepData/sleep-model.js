@@ -1,5 +1,5 @@
 const db = require('../../data/dbConfig.js');
-const dateFormat = require('dateformat');
+// const dateFormat = require('dateformat');
 
 module.exports = {
     insert,
@@ -9,6 +9,7 @@ module.exports = {
     getAvgTimeSlept,
     remove,
     update,
+    findByDate
 };
 
 function find() {
@@ -27,6 +28,12 @@ async function insert(sleep) {
 function findById(id) {
     return db('sleep')
         .where({ id })
+        .first();
+}
+
+function findByDate(date) {
+    return db('sleep')
+        .where({ date })
         .first();
 }
 
