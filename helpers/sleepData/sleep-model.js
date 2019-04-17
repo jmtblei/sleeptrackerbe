@@ -34,7 +34,7 @@ function findById(id) {
 function findByDate(date) {
     return db('sleep')
         .where({ date })
-        .first();
+        .first()
 }
 
 function remove(id) {
