@@ -7,7 +7,7 @@ module.exports = {
     findById,
     getAvgTimeSlept,
     remove,
-    update
+    update,
 };
 
 function find() {
@@ -18,7 +18,7 @@ function findBy(sort) {
     return db('sleep').where(sort)
 }
 
-async function add(sleep) {
+async function insert(sleep) {
     const [id] = await db('sleep').insert(sleep);
     return findById(id);
 }
@@ -28,14 +28,6 @@ function findById(id) {
         .where({ id })
         .first();
 }
-
-// function getStats(id, dateStart, dateEnd){
-//     return db('sleep')
-//     .select('timeSlept')
-//     .count('timeSlept')
-//     .whereBetween('date', [dateStart, dateEnd])
-//     .andWhere('user_id', id)
-// }
 
 function remove(id) {
     return db('sleep')
@@ -47,7 +39,7 @@ function update(id, changes){
     return db('sleep')
     .where({ id })
     .update(changes)
-
+}
     async function getAvgTimeSlept(id, dateStart, dateEnd) {
     const avgTimeSlept = await db('sleep')
         .avg('timeSlept as avgTimeSlept')

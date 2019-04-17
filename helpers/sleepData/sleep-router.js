@@ -10,15 +10,6 @@ router.get('/', async(req, res) => {
     }
 })
 
-// router.get('/sleepstats', async(req, res) => {
-//     try {
-//         let sleep = await Sleep.getStats()
-//         res.status(200).json(sleep)
-//     } catch(error){
-//         res.status(500).json('You got nada mas')
-//     }
-// })
-
 router.post('/', async (req, res) => {
     try {
         let sleep = await Sleep.insert(req.body);
