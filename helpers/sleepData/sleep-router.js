@@ -10,31 +10,6 @@ router.get('/', async(req, res) => {
     }
 })
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-router.get('/sleepstats/:id', async(req, res) => {
-    const { id } = req.params;
-    try {
-        let sleep = await Sleep.getAvgTimeSlept(id)
-        res.status(200).json(sleep)
-    } catch(error){
-        res.status(500).json('You got nada mas')
-    }
-})
-
-module.exports = router;
-=======
-=======
-// router.get('/sleepstat/:id', async(req, res) => {
-//     try {
-//         let sleep = await Sleep.getAvgTimeSlept()
-//         res.status(200).json(sleep)
-//     } catch(error){
-//         res.status(500).json('You got nada mas')
-//     }
-// })
-
->>>>>>> 2d22efd9a692537994fafd241766113380edf658
 router.post('/', async (req, res) => {
     try {
         let sleep = await Sleep.insert(req.body);
@@ -81,4 +56,3 @@ router.put('/:id', async (req, res) => {
 
 
 module.exports = router;
->>>>>>> 9e1cb6a71f850a05a328a102f5c4b58d3a76c4a6
