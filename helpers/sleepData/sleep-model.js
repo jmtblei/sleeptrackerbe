@@ -4,7 +4,7 @@ module.exports = {
     insert,
     find,
     findById,
-    getStats,
+    // getStats,
     remove,
     update
 };
@@ -24,13 +24,13 @@ function findById(id){
         .first();
 }
 
-function getStats(id, dateStart, dateEnd){
-    return db('sleep')
-    .select('timeSlept')
-    .count('timeSlept')
-    .whereBetween('date', [dateStart, dateEnd])
-    .andWhere('user_id', id)
-}
+// function getStats(id, dateStart, dateEnd){
+//     return db('sleep')
+//     .select('timeSlept')
+//     .count('timeSlept')
+//     .whereBetween('date', [dateStart, dateEnd])
+//     .andWhere('user_id', id)
+// }
 
 function remove(id) {
     return db('sleep')

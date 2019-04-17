@@ -6,7 +6,6 @@ module.exports = {
     findBy,
     findById,
     findSleepByUserId,
-    // findByUsername
 };
 
 function find() {
@@ -27,12 +26,6 @@ function findById(id){
         .where({ id })
         .first();
 }
-
-// function findByUsername(username){ 
-//     return db('user')
-//         .where({ username })
-//         .first();
-// }
 
 function findSleepByUserId(id){
     return db('user')
