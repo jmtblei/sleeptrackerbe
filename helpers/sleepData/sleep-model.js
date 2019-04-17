@@ -1,13 +1,14 @@
 const db = require('../../data/dbConfig.js');
+const dateFormat = require('dateformat');
 
 module.exports = {
     insert,
     find,
     findBy,
     findById,
+    getAvgTimeSlept,
     remove,
     update,
-    // getDate
 };
 
 function find() {
@@ -31,13 +32,21 @@ function findById(id) {
 
 function remove(id) {
     return db('sleep')
-      .where('id', id)
-      .del();
-  }
-
-function update(id, changes){
-    return db('sleep')
-    .where({ id })
-    .update(changes)
+        .where('id', id)
+        .del();
 }
 
+function update(id, changes) {
+    return db('sleep')
+        .where({ id })
+        .update(changes)
+}
+
+async function getAvgTimeSlept(id) {
+    const avgTimeSlept = await db('sleep')
+        .avg('timeSlept as avgTimeSlept')
+        .whereBetween('date', [sixDaysback.toString(), today.toString()])
+        .andWhere('user_id', id)
+        .first();
+    return { avgTimeSlept: Math.round(avgTimeSlept.avgTimeSlept) };
+}
