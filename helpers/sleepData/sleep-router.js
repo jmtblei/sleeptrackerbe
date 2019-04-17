@@ -11,6 +11,7 @@ router.get('/', async(req, res) => {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.get('/sleepstats/:id', async(req, res) => {
     const { id } = req.params;
     try {
@@ -23,6 +24,17 @@ router.get('/sleepstats/:id', async(req, res) => {
 
 module.exports = router;
 =======
+=======
+// router.get('/sleepstat/:id', async(req, res) => {
+//     try {
+//         let sleep = await Sleep.getAvgTimeSlept()
+//         res.status(200).json(sleep)
+//     } catch(error){
+//         res.status(500).json('You got nada mas')
+//     }
+// })
+
+>>>>>>> 2d22efd9a692537994fafd241766113380edf658
 router.post('/', async (req, res) => {
     try {
         let sleep = await Sleep.insert(req.body);
