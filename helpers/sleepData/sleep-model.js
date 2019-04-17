@@ -1,4 +1,5 @@
 const db = require('../../data/dbConfig.js');
+const dateFormat = require('dateformat');
 
 module.exports = {
     add,
@@ -27,10 +28,14 @@ function findById(id) {
         .first();
 }
 
-async function getAvgTimeSlept(id, dateStart, dateEnd) {
+async function getAvgTimeSlept(id) {
+    let today = new Date();
+    
+    const sixDaysback = today.getDate() -6;
+    
     const avgTimeSlept = await db('sleep')
         .avg('timeSlept as avgTimeSlept')
-        .whereBetween('date', [dateStart, dateEnd])
+        .whereBetween('date', [sixDaysback.toString(), today.toString()])
         .andWhere('user_id', id)
         .first();
     return { avgTimeSlept: Math.round(avgTimeSlept.avgTimeSlept) };

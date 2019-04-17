@@ -10,11 +10,14 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/sleepstats', async(req, res) => {
+router.get('/sleepstats/:id', async(req, res) => {
+    const { id } = req.params;
     try {
-        let sleep = await Sleep.getStats()
+        let sleep = await Sleep.getAvgTimeSlept(id)
         res.status(200).json(sleep)
     } catch(error){
         res.status(500).json('You got nada mas')
     }
 })
+
+module.exports = router;
