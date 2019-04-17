@@ -20,9 +20,9 @@ exports.up = function (knex, Promise) {
             .onUpdate("CASCADE");
 
         sleep.integer("timeSlept").notNullable();
-        sleep.integer("wakeMood");
-        sleep.integer("sleepMood");
-        sleep.date('date', 10);
+        sleep.integer("wakeMood").notNullable();
+        sleep.integer("sleepMood").notNullable();
+        sleep.date('date', 10).notNullable();
     })
 };
 

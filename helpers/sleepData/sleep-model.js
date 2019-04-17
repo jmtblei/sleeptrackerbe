@@ -31,9 +31,10 @@ function findById(id) {
         .first();
 }
 
-function findByDate(date) {
+function findByDate(date, id) {
     return db('sleep')
         .where({ date })
+        .andWhere('user_id', id)
         .first()
 }
 
