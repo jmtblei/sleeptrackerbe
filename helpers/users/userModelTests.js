@@ -1,16 +1,26 @@
 const db = require('../../data/dbConfig');
 const users = require('./user-model');
+const sleeps = require('../sleepData/sleep-model');
 
 module.exports = userModelTests = () => {
     describe('user-model tests', () => {
         beforeEach(async () => { await db('user').truncate() });
         afterEach(async () => { await db('user').truncate() });
+        beforeEach(async () => { await db('sleep').truncate() });
+        afterEach(async () => { await db('sleep').truncate() });
     
         const mockedUser = {
             username: "Giacomo",
             password: "password",
             fullname: "Giacomo Benati",
             email: "giacomobenati@mailbox.org"
+        }
+        const mockedSleepData = {
+            user_id: 1,
+            timeSlept: 6,
+            wakeMood: 2,
+            sleepMood: 3,
+            date: "2019-04-16"
         }
     
         describe('find tests', () => {
@@ -42,9 +52,19 @@ module.exports = userModelTests = () => {
         describe('findById tests', () => {
             it('find a user by id', async () => {
                 const newUser = await users.add(mockedUser);
-    
-                const foundUser = await users.findById(newUser.id);
+                const foundUser = await users.findById(newUser.id)
+                
                 expect(foundUser.username).toEqual(newUser.username);
+            })
+        })
+
+        describe('findSleepByUserId tests', () => {
+            it('find sleep data given a user id', async () => {
+                const newUser = await users.add(mockedUser);
+                await sleeps.add(mockedSleepData);
+                await sleeps.add(mockedSleepData);
+                const newData = await users.findSleepByUserId(newUser.id);
+                expect(newData.length).toBe(2);
             })
         })
     })

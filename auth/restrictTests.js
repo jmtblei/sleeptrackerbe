@@ -6,7 +6,7 @@ const server = require('../api/server');
 module.exports = restrictTests = () => {
     describe('restrict tests', () => {
         beforeEach(async () => await db('user').truncate());
-        afterEach(async () => { await db('user').truncate() });
+        afterEach(async () => await db('user').truncate());
 
         it('gives back a message if a token is not provided', async () => {
             const response = await request(server).get('/api/user');
