@@ -10,9 +10,8 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/:id', async(req, res) => {
-    const { id } = req.params
-    const { date } = req.body
+router.get('/:id/:date', async(req, res) => {
+    const { id, date } = req.params
     try {
         let sleep = await Sleep.findByDate(date, id)
         res.status(200).json(sleep)
