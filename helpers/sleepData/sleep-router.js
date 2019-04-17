@@ -10,6 +10,16 @@ router.get('/', async(req, res) => {
     }
 })
 
+router.get('/:id', async(req, res) => {
+    const { id } = req.params
+    try {
+        let sleep = await Sleep.findById(id)
+        res.status(200).json(sleep)
+    } catch(error){
+        res.status(500).json('Thats not a sleep id')
+    }
+})
+
 router.get('/:id/:date', async(req, res) => {
     const { id, date } = req.params
     try {
