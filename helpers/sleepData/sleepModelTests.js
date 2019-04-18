@@ -58,7 +58,7 @@ module.exports = sleepModelTests = () => {
         })
 
         describe('getStats tests', () => {
-            it('retun avgSleptTime(integer) of an user from a starting date to an end date', async () => {
+            it('retun avgValues of a user sleep data as an object of last week', async () => {
                 const newUser = await users.add(mockedUser);
                 await sleep.insert({ ...mockedSleepData, user_id: newUser.id });
                 await sleep.insert({ ...mockedSleepData, user_id: newUser.id, date: '2019-04-17', timeSlept: 4 });
