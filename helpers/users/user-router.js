@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     .then(users => {
       res.json(users);
     })
-    .catch(err => res.send(err));
+    .catch(err => res.send('Can not get users',err));
 });
 
 router.get('/:id', async(req, res) => {
@@ -16,7 +16,7 @@ router.get('/:id', async(req, res) => {
       let userID = await User.findSleepByUserId(req.params.id)
       res.status(200).json(userID)
   } catch(error){
-      res.status(500).json('You got nada mas')
+      res.status(500).json('You got nada mas', error)
   }
 })
 

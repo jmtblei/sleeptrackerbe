@@ -6,7 +6,7 @@ router.get('/', async(req, res) => {
         let sleep = await Sleep.find()
         res.status(200).json(sleep)
     } catch(error){
-        res.status(500).json('You got nada mas')
+        res.status(500).json('You got nada mas', error)
     }
 })
 
@@ -16,7 +16,7 @@ router.get('/:id', async(req, res) => {
         let sleep = await Sleep.findById(id)
         res.status(200).json(sleep)
     } catch(error){
-        res.status(500).json('Thats not a sleep id')
+        res.status(500).json('Thats not a sleep id', error)
     }
 })
 
@@ -26,7 +26,7 @@ router.get('/:id/:date', async(req, res) => {
         let sleep = await Sleep.findByDate(date, id)
         res.status(200).json(sleep)
     } catch(error){
-        res.status(500).json('Can\'t get the date')
+        res.status(500).json('Can\'t get the date', error)
     }
 })
 
@@ -37,7 +37,8 @@ router.post('/', async (req, res) => {
     } 
     catch (error) {
         res.status(500).json({
-            message:'Error posting sleep data'
+            message:'Error posting sleep data',
+            error
         });
     }
 });
@@ -54,6 +55,7 @@ router.delete('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
           message: 'Error removing stat',
+          error
         });
     }
 });
@@ -70,6 +72,7 @@ router.put('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
           message: 'Error updating the stats',
+          error
         });
       }
 });
