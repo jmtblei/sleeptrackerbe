@@ -6,7 +6,7 @@ module.exports = {
     find,
     findBy,
     findById,
-    getAvgTimeSlept,
+    getAvgSleepData,
     remove,
     update,
     findByDate
@@ -49,11 +49,22 @@ function update(id, changes) {
         .where({ id })
         .update(changes)
 }
-async function getAvgTimeSlept(id) {
-    const avgTimeSlept = await db('sleep')
+async function getAvgSleepData(id) {
+    let today = new Date();
+    let sixDaysback = new Date();
+    sixDaysback.setDate(sixDaysback.getDate() - 6);
+    today = dateFormat(today, 'yyyy-mm-dd');
+    sixDaysback = dateFormat(sixDaysback, 'yyyy-mm-dd');
+    const avarages = await db('sleep')
         .avg('timeSlept as avgTimeSlept')
-        .whereBetween('date', [sixDaysback.toString(), today.toString()])
+        .avg('wakeMood as avgWakeMood')
+        .avg('sleepMood as avgSleepMood')
+        .whereBetween('date', [sixDaysback, today])
         .andWhere('user_id', id)
         .first();
-    return { avgTimeSlept: Math.round(avgTimeSlept.avgTimeSlept) };
+    return {
+        avgTimeSlept: Math.round(avarages.avgTimeSlept),
+        avgWakeMood: Math.round(avarages.avgWakeMood),
+        avgSleepMood: Math.round(avarages.avgSleepMood),
+    };
 }

@@ -66,5 +66,14 @@ module.exports = sleepModelTests = () => {
                 expect(avgTimeSlept).toEqual({ "avgTimeSlept": 5 });
             })
         })
+
+        // describe('findByDate tests', () => {
+        //     it('find the sleep data with the correct id and date', async () => {
+        //         const newUser = await users.add(mockedUser)
+        //         const newData = await sleep.insert({ ...mockedSleepData, user_id: newUser.id })
+
+        //         expect(newData.date).toEqual("2019-04-16");
+        //     })
+        // })
     })
 }
