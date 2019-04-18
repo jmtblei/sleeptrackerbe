@@ -28,8 +28,8 @@ module.exports = userRouterTests = () => {
                 newUser = await request(server)
                     .post('/api/auth/register')
                     .send({ username: "giaco", password: 'benatiii' });
-                await sleep.add({ ...mockedSleepData, user_id: newUser.body.id });
-                await sleep.add({ ...mockedSleepData, user_id: newUser.body.id, date: '2019-04-17', timeSlept: 4 });
+                await sleep.insert({ ...mockedSleepData, user_id: newUser.body.id });
+                await sleep.insert({ ...mockedSleepData, user_id: newUser.body.id, date: '2019-04-17', timeSlept: 4 });
                 login = await request(server)
                     .post('/api/auth/login')
                     .send({ username: `giaco`, password: `benatiii` })

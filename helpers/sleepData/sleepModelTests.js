@@ -34,7 +34,7 @@ module.exports = sleepModelTests = () => {
         describe('findBy tests', () => {
             it('find the sleep Data by the correct param and return his id', async () => {
                 const newUser = await users.add(mockedUser);
-                await sleep.add({ ...mockedSleepData, user_id: newUser.id });
+                await sleep.insert({ ...mockedSleepData, user_id: newUser.id });
                 let foundSleepData = await sleep.findBy({ date: mockedSleepData.date });
                 expect(Array.isArray(foundSleepData)); // line probably to refactor
             })
@@ -43,7 +43,7 @@ module.exports = sleepModelTests = () => {
         describe('add tests', () => {
             it('add and return the newly created sleep data', async () => {
                 const newUser = await users.add(mockedUser);
-                const newData = await sleep.add({ ...mockedSleepData, user_id: newUser.id });
+                const newData = await sleep.insert({ ...mockedSleepData, user_id: newUser.id });
                 expect(newData.date).toEqual(mockedSleepData.date);
             })
         })
@@ -51,7 +51,7 @@ module.exports = sleepModelTests = () => {
         describe('findById tests', () => {
             it('find the sleep data with the correct id', async () => {
                 const newUser = await users.add(mockedUser);
-                const newData = await sleep.add({ ...mockedSleepData, user_id: newUser.id });
+                const newData = await sleep.insert({ ...mockedSleepData, user_id: newUser.id });
                 const foundData = await sleep.findById(newData.id);
                 expect(foundData.date).toEqual(mockedSleepData.date);
             })
@@ -60,9 +60,10 @@ module.exports = sleepModelTests = () => {
         describe('getStats tests', () => {
             it('retun avgSleptTime(integer) of an user from a starting date to an end date', async () => {
                 const newUser = await users.add(mockedUser);
-                const newData1 = await sleep.add({ ...mockedSleepData, user_id: newUser.id });
-                const newData2 = await sleep.add({ ...mockedSleepData, user_id: newUser.id, date: '2019-04-17', timeSlept: 4 });
-                const avgTimeSlept = await sleep.getAvgTimeSlept(newUser.id, newData1.date, newData2.date);
+                await sleep.insert({ ...mockedSleepData, user_id: newUser.id });
+                await sleep.insert({ ...mockedSleepData, user_id: newUser.id, date: '2019-04-17', timeSlept: 4 });
+                await sleep.insert({ ...mockedSleepData, user_id: newUser.id, date: '2019-04-01', timeSlept: 1 });
+                const avgTimeSlept = await sleep.getAvgSleepData(newUser.id);
                 expect(avgTimeSlept).toEqual({ "avgTimeSlept": 5 });
             })
         })

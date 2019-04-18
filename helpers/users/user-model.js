@@ -27,9 +27,9 @@ function findById(id) {
         .first();
 }
 
-function findSleepByUserId(id){
+function findSleepByUserId(id) {
     return db('user')
-    .select('sleep.id','sleep.user_id','user.fullname', 'sleep.timeSlept', 'sleep.wakeMood', 'sleep.sleepMood', 'sleep.date')
-    .join('sleep', 'user.id', 'sleep.user_id' )
-    .where('user.id', id)
+        .select('sleep.id', 'sleep.user_id', 'user.fullname', 'sleep.timeSlept', 'sleep.wakeMood', 'sleep.sleepMood', 'sleep.date')
+        .join('sleep', 'user.id', 'sleep.user_id')
+        .where('user.id', id)
 }

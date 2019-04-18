@@ -42,12 +42,12 @@ module.exports = {
     },
   },
 
-  production:{
+  production: {
     client: 'pg',
     connection: sleeperDBconnection,
     migrations: {
       directory: './data/migrations'
-    }, 
+    },
     seeds: {
       directory: './data/seeds',
     },
