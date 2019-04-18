@@ -1,27 +1,19 @@
 # **sleeptrackerbe**
-
 ## Description
-This api allows the user to add/edit and delete sleep entries.
+This api allows the user to add/edit and delete sleep entries. Maintaining a record of the hours and moods of when they went to bed and when they woke up as well as a time stamp for how long they slept that night.
 
-**User**
-{
-- id
-- username
-- password
-}
+## Getting Started
+For an example of how to implement this code on the client side see the link below:
+https://github.com/sleeptrackerteam/sleeptrackerfe
 
-**SleepStat**
-{ 
-- id  
-- user_id
-- timeSlept
-- wakeMood
-- sleepMood
-- date
-}
+## Prerequisites
+All of the below dependencies can be installed using:\
+yarn add < name_of_dependency >\
+for dev dependencies simply add --dev after the < name_of_dependency >
 
-## Installation
+### Installation
 This project was created using yarn and designed for react client side. Other dependencies include:
+
 ### "dependencies": {
     - "bcryptjs": "^2.4.3",
     - "cors": "^2.8.5",
@@ -41,33 +33,58 @@ This project was created using yarn and designed for react client side. Other de
     - "supertest": "^4.0.2"
   }
 
+## Examples of Tables
+
+**User table**
+{
+- id       <-- Required
+- fullName
+- email
+- username <-- Required
+- password <-- Required
+}
+
+**SleepStat table**
+{ 
+- id        <-- Required
+- user_id   <-- Foreign Key / Required
+- timeSlept <-- Required
+- wakeMood  <-- Required
+- sleepMood <-- Required
+- date      <--format('YYYY-MM-DD') / Required
+}
+
+
 # Usage
 ### EndPoints
-Register a user - POST
+### User
+- **Register a user - POST**
 - https://sleeper-app.herokuapp.com/api/auth/register    
 
-Login - POST
+- **Login - POST**
 - https://sleeper-app.herokuapp.com/api/auth/login        
 
-Get all user information - GET
+- **Get all user information - GET**
 - https://sleeper-app.herokuapp.com/api/user              
 
-Get a specific user - GET
-- https://sleeper-app.herokuapp.com/api/user/:id          
+- **Get a specific user - GET**
+- https://sleeper-app.herokuapp.com/api/user/:id    
 
-Get all sleep data - GET
+### SleepData
+
+- **Get all sleep data - GET**
 - https://sleeper-app.herokuapp.com/api/sleep             
 
-Post sleep data - POST
+- **Post sleep data - POST**
 - https://sleeper-app.herokuapp.com/api/sleep             
 
-Get a single sleep stat based on id - GET
+- **Get a single sleep stat based on id - GET**
 - https://sleeper-app.herokuapp.com/api/sleep/:id         
 
-Delete a sleep stat based on id - DELETE
+- **Delete a sleep stat based on id - DELETE**
 - https://sleeper-app.herokuapp.com/api/sleep/:id         
 
-Get a single sleep stat based on user_id and date - GET
+- **Get a single sleep stat based on user_id and date - GET**
 - https://sleeper-app.herokuapp.com/api/sleep/:id/:date   
 
 # Support
