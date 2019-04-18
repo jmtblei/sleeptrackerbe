@@ -1,9 +1,16 @@
-# Name
-**sleeptrackerbe**
+# **sleeptrackerbe**
 
 ## Description
 This api allows the user to add/edit and delete sleep entries.
+**User**
+{
+- id
+- username
+- password
+}
+**SleepStat**
 { 
+- id  
 - user_id
 - timeSlept
 - wakeMood
@@ -34,27 +41,35 @@ This project was created using yarn and designed for react client side. Other de
 
 # Usage
 ### EndPoints
- //Register a user - POST
+//Register a user - POST
 - https://sleeper-app.herokuapp.com/api/auth/register    
+
 //Login - POST
 - https://sleeper-app.herokuapp.com/api/auth/login        
+
 //Get all user information - GET
 - https://sleeper-app.herokuapp.com/api/user              
+
 //Get a specific user - GET
 - https://sleeper-app.herokuapp.com/api/user/:id          
+
 //Get all sleep data - GET
 - https://sleeper-app.herokuapp.com/api/sleep             
+
 //Post sleep data - POST
 - https://sleeper-app.herokuapp.com/api/sleep             
+
 //Get a single sleep stat based on id - GET
 - https://sleeper-app.herokuapp.com/api/sleep/:id         
+
 //Delete a sleep stat based on id - DELETE
 - https://sleeper-app.herokuapp.com/api/sleep/:id         
+
 //Get a single sleep stat based on user_id and date - GET
 - https://sleeper-app.herokuapp.com/api/sleep/:id/:date   
 
 # Support
-https://github.com/LambdaSchool
+GITHUB: https://github.com/LambdaSchool\
 email: jacob.m.mcfaul@gmail.com
 
 # Authors and acknowledgment
