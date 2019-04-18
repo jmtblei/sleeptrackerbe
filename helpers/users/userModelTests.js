@@ -59,10 +59,10 @@ module.exports = userModelTests = () => {
         })
 
         describe('findSleepByUserId tests', () => {
-            it.skip('find sleep data given a user id', async () => {
+            it('find sleep data given a user id', async () => {
                 const newUser = await users.add(mockedUser);
-                await sleeps.add(mockedSleepData);
-                await sleeps.add(mockedSleepData);
+                await sleeps.insert(mockedSleepData);
+                await sleeps.insert(mockedSleepData);
                 const newData = await users.findSleepByUserId(newUser.id);
                 expect(newData.length).toBe(2);
             })

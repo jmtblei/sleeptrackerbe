@@ -33,7 +33,11 @@ router.get('/:id/:date', async(req, res) => {
 router.post('/', async (req, res) => {
     try {
         let sleep = await Sleep.insert(req.body);
+        if(typeof sleep.timeSlept === 'number'){
             res.status(201).json(sleep);
+        }else{
+            res.status(404).json('Error sending post')
+        }
     } 
     catch (error) {
         res.status(500).json({
