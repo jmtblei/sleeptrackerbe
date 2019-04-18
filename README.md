@@ -2,12 +2,14 @@
 
 ## Description
 This api allows the user to add/edit and delete sleep entries.
+
 **User**
 {
 - id
 - username
 - password
 }
+
 **SleepStat**
 { 
 - id  
@@ -41,39 +43,39 @@ This project was created using yarn and designed for react client side. Other de
 
 # Usage
 ### EndPoints
-//Register a user - POST
+Register a user - POST
 - https://sleeper-app.herokuapp.com/api/auth/register    
 
-//Login - POST
+Login - POST
 - https://sleeper-app.herokuapp.com/api/auth/login        
 
-//Get all user information - GET
+Get all user information - GET
 - https://sleeper-app.herokuapp.com/api/user              
 
-//Get a specific user - GET
+Get a specific user - GET
 - https://sleeper-app.herokuapp.com/api/user/:id          
 
-//Get all sleep data - GET
+Get all sleep data - GET
 - https://sleeper-app.herokuapp.com/api/sleep             
 
-//Post sleep data - POST
+Post sleep data - POST
 - https://sleeper-app.herokuapp.com/api/sleep             
 
-//Get a single sleep stat based on id - GET
+Get a single sleep stat based on id - GET
 - https://sleeper-app.herokuapp.com/api/sleep/:id         
 
-//Delete a sleep stat based on id - DELETE
+Delete a sleep stat based on id - DELETE
 - https://sleeper-app.herokuapp.com/api/sleep/:id         
 
-//Get a single sleep stat based on user_id and date - GET
+Get a single sleep stat based on user_id and date - GET
 - https://sleeper-app.herokuapp.com/api/sleep/:id/:date   
 
 # Support
-GITHUB: https://github.com/LambdaSchool\
+GITHUB: https://github.com/LambdaSchool \
 email: jacob.m.mcfaul@gmail.com
 
 # Authors and acknowledgment
-**Shout out to Giacomo Benati and Peter Pham!!!**
+Shout out to **Giacomo Benati** and **Peter Pham!!!**
 
 # Project status
 This project may have updates from time to time to keep it up to date so if you have an issue see the support section.
