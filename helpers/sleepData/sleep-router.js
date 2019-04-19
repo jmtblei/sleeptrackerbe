@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
         if(typeof sleep.wakeMood === 'number'){
             res.status(201).json(sleep);
         }else{
-            res.status(404).json('Error sending post')
+            res.status(400).json('Error sending post')
         }
     } 
     catch (error) {

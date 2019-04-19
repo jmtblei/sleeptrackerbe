@@ -80,7 +80,7 @@ module.exports = userRouterTests = () => {
                 .set({ Authorization: `${login.body.token}` })
                 .send({ user_id: 1, date: '2019-04-16', wakeMood:'Thanks you', sleepMood:2, timeSlept:8 })
                 
-                expect(response.status).toBe(404);
+                expect(response.status).toBe(400);
             })
             
             it('return 201 status if data is correct', async () => {
