@@ -35,12 +35,12 @@ module.exports = restrictTests = () => {
         it('gives a 200 status code if the correct token is provided', async () => {
             await request(server)
                 .post('/api/auth/register')
-                .send({ username: "giaco", password: 'benatiii' })
+                .send({ username: "jacob", password: 'password' })
             const login = await request(server)
                 .post('/api/auth/login')
-                .send({ username: "giaco", password: 'benatiii' })
+                .send({ username: "jacob", password: 'password' })
             const response = await request(server)
-                .get('/api/user')
+                .get(`/api/user/${login.body.id}/sleep`)
                 .set({ Authorization: `${login.body.token}` });
             expect(response.status).toEqual(200);
         })
