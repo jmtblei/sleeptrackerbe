@@ -4,8 +4,9 @@ const Sleep = require('../sleepData/sleep-model');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  User.find()
+router.get('/:id/sleep', (req, res) => {
+  const { id } = req.params
+  User.get(id)
     .then(users => {
       res.json(users);
     })

@@ -2,6 +2,7 @@ const db = require('../../data/dbConfig.js');
 
 module.exports = {
     add,
+    get,
     find,
     findBy,
     findById,
@@ -32,4 +33,11 @@ function findSleepByUserId(id){
     .select('sleep.id','sleep.user_id','user.fullname', 'sleep.timeSlept', 'sleep.wakeMood', 'sleep.sleepMood', 'sleep.date')
     .join('sleep', 'user.id', 'sleep.user_id' )
     .where('user.id', id) 
+}
+
+function get(userID){
+    return db('sleep')
+        .join('user', 'user.id', 'sleep.user_id')
+        .select('sleep.*')
+        .where('sleep.user_id', userID)
 }

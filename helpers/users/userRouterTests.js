@@ -53,59 +53,59 @@ module.exports = userRouterTests = () => {
                     .set({ Authorization: `${login.body.token}` });
                 expect(response.body).toEqual({ message: "There aren't sleep data for the selected user!" });
             })
-            // This test was good until we merged ;D
-            it.skip('return an empty array if there is not sleep data for the user', async () => {
-                await db('sleep').truncate()
-                const response = await request(server)
-                    .get(`/api/user/${newUser.body.id}`)
-                    .set({ Authorization: `${login.body.token}` });
-                expect(response.body).toEqual([]);
-            })
-
+            
             it('return json object if data is found', async () => {
                 newUser = await request(server)
-                    .post('/api/auth/register')
-                    .send({ username: "jacob", password: 'password' });
+                .post('/api/auth/register')
+                .send({ username: "jacob", password: 'password' });
                 await sleep.insert({ ...mockedSleepData, user_id: newUser.body.id });
                 login = await request(server)
-                    .post('/api/auth/login')
-                    .send({ username: `jacob`, password: `password` })
+                .post('/api/auth/login')
+                .send({ username: `jacob`, password: `password` })
                 await request(server)
-                    .get(`/api/user/${newUser.body.id}`)
-                    .set({ Authorization: `${login.body.token}` })
+                .get(`/api/user/${newUser.body.id}`)
+                .set({ Authorization: `${login.body.token}` })
                 .expect('Content-Type', /json/);
             })
-
+            
             it('return 404 status if data is wrong', async () => {
                 newUser = await request(server)
-                    .post('/api/auth/register') 
-                    .send({ username: "jacob", password: 'password' });
+                .post('/api/auth/register') 
+                .send({ username: "jacob", password: 'password' });
                 login = await request(server)
-                    .post('/api/auth/login')
-                    .send({ username: `jacob`, password: `password` })
+                .post('/api/auth/login')
+                .send({ username: `jacob`, password: `password` })
                 const response = await request(server)
-                    .post(`/api/sleep/`)
-                    .set({ Authorization: `${login.body.token}` })
-                    .send({ user_id: 1, date: '2019-04-16', wakeMood:4, sleepMood:2, timeSlept:'Thanks you' })
+                .post(`/api/sleep/`)
+                .set({ Authorization: `${login.body.token}` })
+                .send({ user_id: 1, date: '2019-04-16', wakeMood:'Thanks you', sleepMood:2, timeSlept:8 })
                 
                 expect(response.status).toBe(404);
             })
-
+            
             it('return 201 status if data is correct', async () => {
                 newUser = await request(server)
-                    .post('/api/auth/register') 
-                    .send({ username: "jacob", password: 'password' });
+                .post('/api/auth/register') 
+                .send({ username: "jacob", password: 'password' });
                 login = await request(server)
-                    .post('/api/auth/login')
-                    .send({ username: `jacob`, password: `password` })
+                .post('/api/auth/login')
+                .send({ username: `jacob`, password: `password` })
                 const response = await request(server)
-                    .post(`/api/sleep/`)
-                    .set({ Authorization: `${login.body.token}` })
-                    .send({ user_id: 1, date: '2019-04-16', wakeMood:4, sleepMood:2, timeSlept:8 })
+                .post(`/api/sleep/`)
+                .set({ Authorization: `${login.body.token}` })
+                .send({ user_id: 1, date: '2019-04-16', wakeMood:4, sleepMood:2, timeSlept:8 })
                 
                 expect(response.status).toBe(201);
             })
-
+            
+            // // This test was good until we merged ;D
+            // it.skip('return an empty array if there is not sleep data for the user', async () => {
+            //     await db('sleep').truncate()
+            //     const response = await request(server)
+            //         .get(`/api/user/${newUser.body.id}`)
+            //         .set({ Authorization: `${login.body.token}` });
+            //     expect(response.body).toEqual([]);
+            // })
         })
     })
 }

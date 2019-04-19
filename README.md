@@ -64,13 +64,13 @@ This project was created using yarn and designed for react client side. Other de
 - **Login - POST**
 - https://sleeper-app.herokuapp.com/api/auth/login        
 
-- **Get all user information - GET**
-- https://sleeper-app.herokuapp.com/api/user              
-
 - **Get a specific user - GET**
 - https://sleeper-app.herokuapp.com/api/user/:id    
 
 ### SleepData
+
+- **Get all sleep information for a specific user - GET**
+- https://sleeper-app.herokuapp.com/api/user/:id/sleep              
 
 - **Get all sleep data - GET**
 - https://sleeper-app.herokuapp.com/api/sleep             
