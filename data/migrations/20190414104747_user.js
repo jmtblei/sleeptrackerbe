@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
             .string("username", 32)
             .notNullable()
             .unique();
-        users.string("password", 32).notNullable();
+        users.string("password", 100).notNullable();
     }).createTable('sleep', sleep => {
         sleep.increments();
         sleep
